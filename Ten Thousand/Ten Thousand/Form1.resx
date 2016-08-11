@@ -117,44 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="die1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die1s" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die1s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die2s" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die2s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die3s" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die3s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die4s" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die4s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die5s" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die5s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="die6s" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\die6s.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Thumbs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\obj\Images\Dice\Thumbs.db;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
 </root>

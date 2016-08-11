@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +65,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="obj\Images\Dice\Thumbs.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +80,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die1s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die2s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die3s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die4s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die5s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\Images\Dice\die6s.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
