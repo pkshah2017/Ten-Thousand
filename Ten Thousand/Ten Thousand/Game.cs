@@ -10,10 +10,11 @@ namespace Ten_Thousand
     {
         private Player[] players;
         private int currentPlayer;
+        private Die[] Dice;
         private Random generator;
-        private bool[] rollable;
-        private bool[] scorable;
-        private int[] dieValue;
+       // private bool[] rollable;
+      //  private bool[] scorable;
+       // private int[] dieValue;
         private int[][] sets;
         private int currentTurnScore;
 
@@ -22,9 +23,9 @@ namespace Ten_Thousand
             players = new Player[names.Length];
             for (int i = 0; i < names.Length; i++)
                 players[i] = new Player(names[i]);
-            rollable = new bool[] { true, true, true, true, true };
-            scorable = new bool[5];
-            dieValue = new int[5];
+            Dice = new Die[5] { new Die(), new Die(), new Die(), new Die(), new Die() };
+           // rollable = new bool[] { true, true, true, true, true };
+            //dieValue = new int[5];
             currentPlayer = 0;
             generator = new Random();
             sets = new int[7][];
@@ -44,9 +45,9 @@ namespace Ten_Thousand
         /// </summary>
         public void rollEm()
         {
-            for (int i = 0; i < dieValue.Length; i++)
-                if (rollable[i])
-                    dieValue[i] = generator.Next(6) + 1;
+            for (int i = 0; i < Dice.Length; i++)
+                if (Dice[i].isRollable())
+                    Dice[i].SetValue(generator.Next(6) + 1);
             checkScorable();
         }
 
@@ -55,21 +56,18 @@ namespace Ten_Thousand
         /// </summary>
         private void checkScorable()
         {
-            //Reset the scorable array
-            scorable = new bool[5];
-
             //If the number is 1 or 5, the number is always scorable
-            for (int i = 0; i < dieValue.Length; i++)
-                if (dieValue[i] == 5 || dieValue[i] == 1)
-                    scorable[i] = true;
+            for (int i = 0; i < Dice.Length; i++)
+                if (Dice[i].GetValue() == 5 || Dice[i].GetValue() == 1)
+                    Dice[i].setScorable(true);
 
 
             List<int> tempLocations;
             for (int i = 2; i < 7; i++)//One iteration for each possible die value (except 1, it does 5 to handle null exception)
             {
                 tempLocations = new List<int>();
-                for (int die = 0; die < dieValue.Length; die++) // One iteration for each die
-                    if (dieValue[die] == i) //If the die is equal to the value we are checking for thi iteration, add the die location to teh array
+                for (int die = 0; die < Dice.Length; die++) // One iteration for each die
+                    if (Dice[die].GetValue() == i) //If the die is equal to the value we are checking for this iteration, add the die location to teh array
                         tempLocations.Add(die);
 
                 sets[i] = tempLocations.ToArray(); // Add the array to the sets array
@@ -78,7 +76,7 @@ namespace Ten_Thousand
             for (int i = 2; i < sets.Length; i++) //One iteration for each possible die value
                 if (sets[i].Length > 2) //If there are 3 or more of that value in the die...
                     foreach (int location in sets[i]) //Go through each of the locations where that value occurs
-                        scorable[location] = true; //Set that location's scorable status to true
+                        Dice[location].setScorable(true); //Set that location's scorable status to true
 
         }
 
@@ -88,16 +86,17 @@ namespace Ten_Thousand
         /// <param name="dieNumber">The die to toggle</param>
         public void dieClick(int dieNumber)
         {
-            if (scorable[dieNumber])
+            if (Dice[dieNumber].isScorable())
             {
-                if (dieValue[dieNumber] == 1 || dieValue[dieNumber] == 5)
-                    rollable[dieNumber] = !rollable[dieNumber];
+                if (Dice[dieNumber].GetValue() == 1 || Dice[dieNumber].GetValue() == 5)
+                    Dice[dieNumber].toggleRollable();
                 else
-                    foreach (int location in sets[dieValue[dieNumber]]) //Go through each of the locations where that value occurs
-                        rollable[location] = !rollable[location]; //Toggle that location's rollable status
+                    foreach (int location in sets[Dice[dieNumber].GetValue()]) //Go through each of the locations where that value occurs
+                        Dice[dieNumber].toggleRollable(); //Toggle that location's rollable status
             }
         }
 
+        /*
         /// <summary>
         /// Returns an array of bool, indicating which are rollable
         /// </summary>
@@ -115,7 +114,7 @@ namespace Ten_Thousand
         {
             return dieValue;
         }
-
+        */
         private int calculateScore()
         {
             return 0;

@@ -10,6 +10,7 @@ namespace Ten_Thousand
     {
         private int value;
         private bool rollable; //If it isn't rollable that means it's scored
+        private bool scorable; //If the die can be scored this round
 
         /// <summary>
         /// Initialize the Die to a value of 0 and a rollable status of true;
@@ -18,6 +19,7 @@ namespace Ten_Thousand
         {
             value = 0;
             rollable = true;
+            scorable = false;
         }
 
         /// <summary>
@@ -43,6 +45,15 @@ namespace Ten_Thousand
         }
 
         /// <summary>
+        /// Set the scorable status of the die to the value specified
+        /// </summary>
+        /// <param name="status">Scorable status of the die</param>
+        public void setScorable(bool status)
+        {
+            scorable = status;
+        }
+
+        /// <summary>
         /// Return the Die Value
         /// </summary>
         /// <returns>Die Value</returns>
@@ -55,9 +66,26 @@ namespace Ten_Thousand
         /// Returns the Die's Rollable Status
         /// </summary>
         /// <returns></returns>
-        public bool GetRollable()
+        public bool isRollable()
         {
             return rollable;
+        }
+
+        /// <summary>
+        /// Toggle the rollable Value
+        /// </summary>
+        public void toggleRollable()
+        {
+            rollable = !rollable;
+        }
+
+        /// <summary>
+        /// Returns the scorable status of the die
+        /// </summary>
+        /// <returns>Scorable status of die</returns>
+        public bool isScorable()
+        {
+            return scorable;
         }
         
     }
