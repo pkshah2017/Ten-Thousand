@@ -110,6 +110,7 @@
             this.Controls.Add(this.nameTxt);
             this.Name = "NewGame";
             this.Text = "NewGame";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewGame_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

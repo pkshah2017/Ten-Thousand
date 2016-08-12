@@ -47,5 +47,12 @@ namespace Ten_Thousand
             }
             this.Close();
         }
+
+        private void NewGame_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Console.Write(names);
+            if(!(names!=null && names.Length != 0))
+                e.Cancel = true;
+        }
     }
 }
