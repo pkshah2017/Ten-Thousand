@@ -11,6 +11,7 @@ namespace Ten_Thousand
         private int value;
         private bool rollable; //If it isn't rollable that means it's scored
         private bool scorable; //If the die can be scored this round
+        private bool newValue; //If the die got the value this round
 
         /// <summary>
         /// Initialize the Die to a value of 0 and a rollable status of true;
@@ -20,6 +21,7 @@ namespace Ten_Thousand
             value = 0;
             rollable = true;
             scorable = false;
+            newValue = true;
         }
 
         /// <summary>
@@ -33,6 +35,7 @@ namespace Ten_Thousand
                 throw new ArgumentOutOfRangeException();
             }
             value = val;
+            newValue = true;
         }
 
         /// <summary>
@@ -51,6 +54,14 @@ namespace Ten_Thousand
         public void setScorable(bool status)
         {
             scorable = status;
+        }
+        
+        /// <summary>
+        /// Set newValue to false
+        /// </summary>
+        public void ageValue()
+        {
+            newValue = false;
         }
 
         /// <summary>
@@ -86,6 +97,15 @@ namespace Ten_Thousand
         public bool isScorable()
         {
             return scorable;
+        }
+
+        /// <summary>
+        /// Returns the new Value State
+        /// </summary>
+        /// <returns>New Value State</returns>
+        public bool isNewValue()
+        {
+            return newValue;
         }
         
     }

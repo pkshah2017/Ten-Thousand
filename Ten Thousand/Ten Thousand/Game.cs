@@ -12,9 +12,6 @@ namespace Ten_Thousand
         private int currentPlayer;
         private Die[] Dice;
         private Random generator;
-       // private bool[] rollable;
-      //  private bool[] scorable;
-       // private int[] dieValue;
         private int[][] sets;
         private int currentTurnScore;
 
@@ -24,8 +21,6 @@ namespace Ten_Thousand
             for (int i = 0; i < names.Length; i++)
                 players[i] = new Player(names[i]);
             Dice = new Die[5] { new Die(), new Die(), new Die(), new Die(), new Die() };
-           // rollable = new bool[] { true, true, true, true, true };
-            //dieValue = new int[5];
             currentPlayer = 0;
             generator = new Random();
             sets = new int[7][];
@@ -40,6 +35,11 @@ namespace Ten_Thousand
             return new string[] { players[currentPlayer].getName(), Convert.ToString(players[currentPlayer].getScore()) };
         }
 
+        public int getTurnScore()
+        {
+            return currentTurnScore;
+        }
+
         /// <summary>
         /// Randomly sets the values of the rollable die
         /// </summary>
@@ -48,6 +48,8 @@ namespace Ten_Thousand
             for (int i = 0; i < Dice.Length; i++)
                 if (Dice[i].isRollable())
                     Dice[i].SetValue(generator.Next(6) + 1);
+                else
+                    Dice[i].ageValue();
             checkScorable();
         }
 
@@ -63,7 +65,7 @@ namespace Ten_Thousand
 
 
             List<int> tempLocations;
-            for (int i = 2; i < 7; i++)//One iteration for each possible die value (except 1, it does 5 to handle null exception)
+            for (int i = 1; i < 7; i++)//One iteration for each possible die value (except 1, it does 5 to handle null exception)
             {
                 tempLocations = new List<int>();
                 for (int die = 0; die < Dice.Length; die++) // One iteration for each die
@@ -94,6 +96,7 @@ namespace Ten_Thousand
                     foreach (int location in sets[Dice[dieNumber].GetValue()]) //Go through each of the locations where that value occurs
                         Dice[dieNumber].toggleRollable(); //Toggle that location's rollable status
             }
+            calculateScore();
         }
 
         /*
@@ -115,9 +118,42 @@ namespace Ten_Thousand
             return dieValue;
         }
         */
-        private int calculateScore()
+        private void calculateScore()
         {
-            return 0;
+            int[][] scoredSets = new int[6][];
+            for (int i = 0; i < 6; i++)
+            {
+                List<int> localSet = new List<int>();
+                for (int dieNumber = 0; dieNumber < Dice.Length; dieNumber++)
+                {
+                    if (Dice[dieNumber].GetValue() == i && !Dice[dieNumber].isRollable())
+                    {
+                        localSet.Add(dieNumber);
+                    }
+                }
+                scoredSets[i] = localSet.ToArray();
+            }
+
+            for (int i = 2; i < scoredSets.Length; i++)
+            {
+                if (i == 5)
+                    continue;
+                
+                if (scoredSets[i].Length == 3)
+                    currentTurnScore += 100 * i;
+                if (scoredSets[i].Length == 4)
+                    currentTurnScore += 3000;
+                if (scoredSets[i].Length == 5)
+                    currentTurnScore += 10000;
+            }
+            if (scoredSets[5].Length == 3)
+                currentTurnScore += 750;
+            else if (scoredSets[5].Length < 3)
+                currentTurnScore += 50 * sets[5].Length;
+            if (scoredSets[1].Length == 3)
+                currentTurnScore += 1000;
+            else if (scoredSets[1].Length < 3)
+                currentTurnScore += 100 * sets[1].Length;
         }
     }
 }
