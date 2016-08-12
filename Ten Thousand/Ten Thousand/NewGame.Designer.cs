@@ -45,6 +45,7 @@
             this.playBtn.TabIndex = 11;
             this.playBtn.Text = "Play 10K";
             this.playBtn.UseVisualStyleBackColor = true;
+            this.playBtn.Click += new System.EventHandler(this.playBtn_Click);
             // 
             // addBtn
             // 
@@ -55,6 +56,7 @@
             this.addBtn.TabIndex = 10;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = true;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // clearBtn
             // 
@@ -65,6 +67,7 @@
             this.clearBtn.TabIndex = 9;
             this.clearBtn.Text = "Clear Names";
             this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // nameList
             // 
@@ -95,6 +98,7 @@
             // 
             // NewGame
             // 
+            this.AcceptButton = this.addBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 353);

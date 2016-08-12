@@ -21,5 +21,11 @@ namespace Ten_Thousand
         {
 
         }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewGame loader = new NewGame();
+            loader.ShowDialog();
+        }
     }
 }
