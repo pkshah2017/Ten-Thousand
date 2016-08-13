@@ -50,10 +50,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.endTurnBtn = new System.Windows.Forms.Button();
             this.rollEm = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.dieImageTwo = new System.Windows.Forms.Label();
+            this.dieImageThree = new System.Windows.Forms.Label();
+            this.dieImageFour = new System.Windows.Forms.Label();
+            this.dieImageFive = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -241,48 +241,49 @@
             this.rollEm.TabIndex = 11;
             this.rollEm.Text = "Roll \'Em";
             this.rollEm.UseVisualStyleBackColor = true;
+            this.rollEm.Click += new System.EventHandler(this.rollEm_Click);
             // 
-            // label9
+            // dieImageTwo
             // 
-            this.label9.Image = global::Ten_Thousand.Properties.Resources.die1;
-            this.label9.Location = new System.Drawing.Point(111, 38);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 80);
-            this.label9.TabIndex = 13;
+            this.dieImageTwo.Image = global::Ten_Thousand.Properties.Resources.die1;
+            this.dieImageTwo.Location = new System.Drawing.Point(111, 38);
+            this.dieImageTwo.Name = "dieImageTwo";
+            this.dieImageTwo.Size = new System.Drawing.Size(80, 80);
+            this.dieImageTwo.TabIndex = 13;
             // 
-            // label1
+            // dieImageThree
             // 
-            this.label1.Image = global::Ten_Thousand.Properties.Resources.die1;
-            this.label1.Location = new System.Drawing.Point(197, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 80);
-            this.label1.TabIndex = 14;
+            this.dieImageThree.Image = global::Ten_Thousand.Properties.Resources.die1;
+            this.dieImageThree.Location = new System.Drawing.Point(197, 38);
+            this.dieImageThree.Name = "dieImageThree";
+            this.dieImageThree.Size = new System.Drawing.Size(80, 80);
+            this.dieImageThree.TabIndex = 14;
             // 
-            // label2
+            // dieImageFour
             // 
-            this.label2.Image = global::Ten_Thousand.Properties.Resources.die1;
-            this.label2.Location = new System.Drawing.Point(283, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 80);
-            this.label2.TabIndex = 15;
+            this.dieImageFour.Image = global::Ten_Thousand.Properties.Resources.die1;
+            this.dieImageFour.Location = new System.Drawing.Point(283, 38);
+            this.dieImageFour.Name = "dieImageFour";
+            this.dieImageFour.Size = new System.Drawing.Size(80, 80);
+            this.dieImageFour.TabIndex = 15;
             // 
-            // label3
+            // dieImageFive
             // 
-            this.label3.Image = global::Ten_Thousand.Properties.Resources.die1;
-            this.label3.Location = new System.Drawing.Point(369, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 80);
-            this.label3.TabIndex = 7;
+            this.dieImageFive.Image = global::Ten_Thousand.Properties.Resources.die1;
+            this.dieImageFive.Location = new System.Drawing.Point(369, 38);
+            this.dieImageFive.Name = "dieImageFive";
+            this.dieImageFive.Size = new System.Drawing.Size(80, 80);
+            this.dieImageFive.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 463);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.dieImageFive);
+            this.Controls.Add(this.dieImageFour);
+            this.Controls.Add(this.dieImageThree);
+            this.Controls.Add(this.dieImageTwo);
             this.Controls.Add(this.endTurnBtn);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -324,10 +325,10 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button endTurnBtn;
         private System.Windows.Forms.Button rollEm;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label dieImageTwo;
+        private System.Windows.Forms.Label dieImageThree;
+        private System.Windows.Forms.Label dieImageFour;
+        private System.Windows.Forms.Label dieImageFive;
     }
 }
 

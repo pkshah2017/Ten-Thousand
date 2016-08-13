@@ -32,9 +32,13 @@ namespace Ten_Thousand
         /// <returns>Array in which first item is player name and second item it player score</returns>
         public string[] currentPlayerInfo()
         {
-            return new string[] { players[currentPlayer].getName(), Convert.ToString(players[currentPlayer].getScore()) };
+            return new string[] { players[currentPlayer].getName(), Convert.ToString(players[currentPlayer].getScore()), Convert.ToString(currentTurnScore) };
         }
 
+        /// <summary>
+        /// Returns the score of the current turn
+        /// </summary>
+        /// <returns>Current Turn Score</returns>
         public int getTurnScore()
         {
             return currentTurnScore;
@@ -99,13 +103,18 @@ namespace Ten_Thousand
             calculateScore();
         }
 
-        /*
+        
         /// <summary>
         /// Returns an array of bool, indicating which are rollable
         /// </summary>
         /// <returns>Array of booleans indicating which are rollable</returns>
         public bool[] getRollable()
         {
+            bool[] rollable = new bool[5];
+            for (int i = 0; i < Dice.Length; i++)
+            {
+                rollable[i] = Dice[i].isRollable();
+            }
             return rollable;
         }
 
@@ -115,9 +124,14 @@ namespace Ten_Thousand
         /// <returns>An array of ints indicating the values of the die</returns>
         public int[] getDieValues()
         {
+            int[] dieValue = new int[5];
+            for (int i = 0; i < Dice.Length; i++)
+            {
+                dieValue[i] = Dice[i].GetValue();
+            }
             return dieValue;
         }
-        */
+        
         private void calculateScore()
         {
             int[][] scoredSets = new int[6][];

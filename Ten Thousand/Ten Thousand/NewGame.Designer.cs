@@ -42,7 +42,7 @@
             this.playBtn.Location = new System.Drawing.Point(259, 301);
             this.playBtn.Name = "playBtn";
             this.playBtn.Size = new System.Drawing.Size(96, 36);
-            this.playBtn.TabIndex = 11;
+            this.playBtn.TabIndex = 2;
             this.playBtn.Text = "Play 10K";
             this.playBtn.UseVisualStyleBackColor = true;
             this.playBtn.Click += new System.EventHandler(this.playBtn_Click);
