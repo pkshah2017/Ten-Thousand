@@ -82,6 +82,7 @@
             this.dieImageOne.Name = "dieImageOne";
             this.dieImageOne.Size = new System.Drawing.Size(80, 80);
             this.dieImageOne.TabIndex = 0;
+            this.dieImageOne.Click += new System.EventHandler(this.dieImageOne_Click);
             // 
             // menuStrip1
             // 
@@ -250,6 +251,7 @@
             this.dieImageTwo.Name = "dieImageTwo";
             this.dieImageTwo.Size = new System.Drawing.Size(80, 80);
             this.dieImageTwo.TabIndex = 13;
+            this.dieImageTwo.Click += new System.EventHandler(this.dieImageTwo_Click);
             // 
             // dieImageThree
             // 
@@ -258,6 +260,7 @@
             this.dieImageThree.Name = "dieImageThree";
             this.dieImageThree.Size = new System.Drawing.Size(80, 80);
             this.dieImageThree.TabIndex = 14;
+            this.dieImageThree.Click += new System.EventHandler(this.dieImageThree_Click);
             // 
             // dieImageFour
             // 
@@ -266,6 +269,7 @@
             this.dieImageFour.Name = "dieImageFour";
             this.dieImageFour.Size = new System.Drawing.Size(80, 80);
             this.dieImageFour.TabIndex = 15;
+            this.dieImageFour.Click += new System.EventHandler(this.dieImageFour_Click);
             // 
             // dieImageFive
             // 
@@ -274,6 +278,7 @@
             this.dieImageFive.Name = "dieImageFive";
             this.dieImageFive.Size = new System.Drawing.Size(80, 80);
             this.dieImageFive.TabIndex = 7;
+            this.dieImageFive.Click += new System.EventHandler(this.dieImageFive_Click);
             // 
             // Form1
             // 

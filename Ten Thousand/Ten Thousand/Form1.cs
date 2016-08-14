@@ -41,6 +41,7 @@ namespace Ten_Thousand
             whiteImages = new Bitmap[] {Ten_Thousand.Properties.Resources.die1s, Ten_Thousand.Properties.Resources.die2s, Ten_Thousand.Properties.Resources.die3s,
                 Ten_Thousand.Properties.Resources.die4s,Ten_Thousand.Properties.Resources.die5s,Ten_Thousand.Properties.Resources.die6s};
             updateCurrentPlayerInfo();
+            rollEm.PerformClick();
         }
 
         private void updateCurrentPlayerInfo()
@@ -66,6 +67,56 @@ namespace Ten_Thousand
             game.rollEm();
             updateCurrentPlayerInfo();
             updateDieImages();
+        }
+
+        private void dieImageOne_Click(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                game.dieClick(0);
+                updateDieImages();
+                updateCurrentPlayerInfo();
+            }
+        }
+
+        private void dieImageTwo_Click(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                game.dieClick(1);
+                updateDieImages();
+                updateCurrentPlayerInfo();
+            }
+        }
+
+        private void dieImageThree_Click(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                game.dieClick(2);
+                updateDieImages();
+                updateCurrentPlayerInfo();
+            }
+        }
+
+        private void dieImageFour_Click(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                game.dieClick(3);
+                updateDieImages();
+                updateCurrentPlayerInfo();
+            }
+        }
+
+        private void dieImageFive_Click(object sender, EventArgs e)
+        {
+            if (game != null)
+            {
+                game.dieClick(4);
+                updateDieImages();
+                updateCurrentPlayerInfo();
+            }
         }
     }
 }

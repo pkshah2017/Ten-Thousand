@@ -80,25 +80,40 @@ namespace Ten_Thousand
             }
 
             for (int i = 2; i < sets.Length; i++) //One iteration for each possible die value
-                if (sets[i].Length > 2) //If there are 3 or more of that value in the die...
-                    foreach (int location in sets[i]) //Go through each of the locations where that value occurs
-                        Dice[location].setScorable(true); //Set that location's scorable status to true
-
+                if (sets[i].Length > 2)
+                {//If there are 3 or more of that value in the die...
+                    //Check if any of them are old values
+                    bool allNew = true;
+                    foreach (int location in sets[i])
+                    {                        
+                        if (!Dice[location].isNewValue())
+                            allNew = false;
+                    }
+                    if(allNew)//If all the values are new
+                        foreach (int location in sets[i]) //Go through each of the locations where that value occurs
+                            Dice[location].setScorable(true); //Set that location's scorable status to true
+                    else//If some of the values are new
+                        foreach (int location in sets[i]) //Go through each of the locations where that value occurs
+                            if(!Dice[location].isNewValue())//Find the locations where the value isn't new
+                                Dice[location].setScorable(true); //Set that location's scorable status to true
+                }
         }
 
         /// <summary>
         /// Toggles the status of die at die Number if it is scorable
         /// </summary>
-        /// <param name="dieNumber">The die to toggle</param>
+        /// <param name="dieNumber">The die to toggle (first die is 0)</param>
         public void dieClick(int dieNumber)
         {
             if (Dice[dieNumber].isScorable())
             {
                 if (Dice[dieNumber].GetValue() == 1 || Dice[dieNumber].GetValue() == 5)
                     Dice[dieNumber].toggleRollable();
-                else
+                else                
                     foreach (int location in sets[Dice[dieNumber].GetValue()]) //Go through each of the locations where that value occurs
-                        Dice[dieNumber].toggleRollable(); //Toggle that location's rollable status
+                        if (Dice[location].isScorable())//Make sure that Dice is scorable
+                            Dice[location].toggleRollable();//Toggle that location's rollable status
+                
             }
             calculateScore();
         }
@@ -134,8 +149,9 @@ namespace Ten_Thousand
         
         private void calculateScore()
         {
-            int[][] scoredSets = new int[6][];
-            for (int i = 0; i < 6; i++)
+            currentTurnScore = 0;
+            int[][] scoredSets = new int[7][];
+            for (int i = 1; i < scoredSets.Length; i++)
             {
                 List<int> localSet = new List<int>();
                 for (int dieNumber = 0; dieNumber < Dice.Length; dieNumber++)
@@ -150,7 +166,7 @@ namespace Ten_Thousand
 
             for (int i = 2; i < scoredSets.Length; i++)
             {
-                if (i == 5)
+                if (i == 5 && scoredSets[i].Length<=3)
                     continue;
                 
                 if (scoredSets[i].Length == 3)
@@ -163,11 +179,11 @@ namespace Ten_Thousand
             if (scoredSets[5].Length == 3)
                 currentTurnScore += 750;
             else if (scoredSets[5].Length < 3)
-                currentTurnScore += 50 * sets[5].Length;
+                currentTurnScore += 50 * scoredSets[5].Length;
             if (scoredSets[1].Length == 3)
                 currentTurnScore += 1000;
             else if (scoredSets[1].Length < 3)
-                currentTurnScore += 100 * sets[1].Length;
+                currentTurnScore += 100 * scoredSets[1].Length;
         }
     }
 }

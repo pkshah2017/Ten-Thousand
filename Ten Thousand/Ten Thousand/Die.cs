@@ -36,6 +36,8 @@ namespace Ten_Thousand
             }
             value = val;
             newValue = true;
+            scorable = false;
+            rollable = true;
         }
 
         /// <summary>
