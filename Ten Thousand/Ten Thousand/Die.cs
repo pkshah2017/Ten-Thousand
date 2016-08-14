@@ -12,6 +12,7 @@ namespace Ten_Thousand
         private bool rollable; //If it isn't rollable that means it's scored
         private bool scorable; //If the die can be scored this round
         private bool newValue; //If the die got the value this round
+        private int rollNum;   //The roll number this die was last set on
 
         /// <summary>
         /// Initialize the Die to a value of 0 and a rollable status of true;
@@ -56,6 +57,15 @@ namespace Ten_Thousand
         public void setScorable(bool status)
         {
             scorable = status;
+        }
+
+        /// <summary>
+        /// Sets which roll this dice was last rolled on
+        /// </summary>
+        /// <param name="roll">Roll Number to set roll to</param>
+        public void setRollNum(int roll)
+        {
+            rollNum = roll;
         }
         
         /// <summary>
@@ -110,5 +120,13 @@ namespace Ten_Thousand
             return newValue;
         }
         
+        /// <summary>
+        /// Returns the rollNum of the die
+        /// </summary>
+        /// <returns>The roll num of the die</returns>
+        public int getRollNum()
+        {
+            return rollNum;
+        }
     }
 }

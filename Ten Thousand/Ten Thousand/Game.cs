@@ -14,6 +14,7 @@ namespace Ten_Thousand
         private Random generator;
         private int[][] sets;
         private int currentTurnScore;
+        private int rollNum;
 
         public Game(string[] names)
         {
@@ -24,6 +25,7 @@ namespace Ten_Thousand
             currentPlayer = 0;
             generator = new Random();
             sets = new int[7][];
+            rollNum = 0;
         }
 
         /// <summary>
@@ -51,9 +53,13 @@ namespace Ten_Thousand
         {
             for (int i = 0; i < Dice.Length; i++)
                 if (Dice[i].isRollable())
+                {
                     Dice[i].SetValue(generator.Next(6) + 1);
+                    Dice[i].setRollNum(rollNum);
+                }
                 else
                     Dice[i].ageValue();
+            rollNum++;
             checkScorable();
         }
 
@@ -69,7 +75,7 @@ namespace Ten_Thousand
 
 
             List<int> tempLocations;
-            for (int i = 1; i < 7; i++)//One iteration for each possible die value (except 1, it does 5 to handle null exception)
+            for (int i = 1; i < 7; i++)//One iteration for each possible die value 
             {
                 tempLocations = new List<int>();
                 for (int die = 0; die < Dice.Length; die++) // One iteration for each die
@@ -79,9 +85,9 @@ namespace Ten_Thousand
                 sets[i] = tempLocations.ToArray(); // Add the array to the sets array
             }
 
-            for (int i = 2; i < sets.Length; i++) //One iteration for each possible die value
-                if (sets[i].Length > 2)
-                {//If there are 3 or more of that value in the die...
+            for (int i = 1; i < sets.Length; i++) //One iteration for each possible die value
+                if (sets[i].Length > 2)//If there are 3 or more of that value in the die...
+                {
                     //Check if any of them are old values
                     bool allNew = true;
                     foreach (int location in sets[i])
@@ -147,26 +153,25 @@ namespace Ten_Thousand
             return dieValue;
         }
         
+        /// <summary>
+        /// Updates the current turn score
+        /// </summary>
         private void calculateScore()
         {
             currentTurnScore = 0;
             int[][] scoredSets = new int[7][];
-            for (int i = 1; i < scoredSets.Length; i++)
+            for (int i = 1; i < scoredSets.Length; i++)//One iteration for each possible die value
             {
                 List<int> localSet = new List<int>();
-                for (int dieNumber = 0; dieNumber < Dice.Length; dieNumber++)
-                {
-                    if (Dice[dieNumber].GetValue() == i && !Dice[dieNumber].isRollable())
-                    {
-                        localSet.Add(dieNumber);
-                    }
-                }
-                scoredSets[i] = localSet.ToArray();
+                for (int dieNumber = 0; dieNumber < Dice.Length; dieNumber++)     //Check every die...
+                    if (Dice[dieNumber].GetValue() == i && !Dice[dieNumber].isRollable())         //If it matches the number we are currently checkint and that it is scored
+                        localSet.Add(dieNumber); //Than add it to a local set of all scored die locations for that value
+                scoredSets[i] = localSet.ToArray(); //Add the list to the scored sets
             }
 
-            for (int i = 2; i < scoredSets.Length; i++)
+            for (int i = 2; i < scoredSets.Length; i++) //For every die value from 2 to 6
             {
-                if (i == 5 && scoredSets[i].Length<=3)
+                if (i == 5) //Skip 5, we handle it seperately
                     continue;
                 
                 if (scoredSets[i].Length == 3)
@@ -176,12 +181,171 @@ namespace Ten_Thousand
                 if (scoredSets[i].Length == 5)
                     currentTurnScore += 10000;
             }
+
+            //How to score the number 5
             if (scoredSets[5].Length == 3)
-                currentTurnScore += 750;
+            {
+                bool allSameAge = true;
+                for (int i = 1; i < scoredSets[5].Length; i++)
+                    if (Dice[scoredSets[5][0]].getRollNum() != Dice[scoredSets[5][i]].getRollNum())
+                        allSameAge = false;
+
+                if (allSameAge)
+                    currentTurnScore += 750;                
+                else
+                    currentTurnScore += 50 * scoredSets[5].Length;
+            }
+            else if (scoredSets[5].Length == 4)
+            {
+                bool allSameAge = true;
+                for (int i = 1; i < scoredSets[5].Length; i++)
+                    if (Dice[scoredSets[5][0]].getRollNum() != Dice[scoredSets[5][i]].getRollNum())
+                        allSameAge = false;
+
+                int[] ages = new int[4];
+                for (int i = 0; i < scoredSets[5].Length; i++)
+                    ages[i] = Dice[scoredSets[5][i]].getRollNum();
+
+                var dict = new Dictionary<int, int>();
+                foreach (int d in ages)
+                    if (dict.ContainsKey(d))
+                        dict[d]++;
+                    else
+                        dict.Add(d, 1);
+
+                bool setOfThree = false;
+                foreach (KeyValuePair<int, int> kvp in dict)
+                    if (kvp.Value == 3)
+                        setOfThree = true;
+
+                if (allSameAge)
+                    currentTurnScore += 3000;
+                else if (setOfThree)
+                    currentTurnScore += 800;
+                else
+                    currentTurnScore += 50 * scoredSets[5].Length;
+            }
+            else if (scoredSets[5].Length == 5)
+            {
+                bool allSameAge = true;
+                for (int i = 1; i < scoredSets[5].Length; i++)
+                    if (Dice[scoredSets[5][0]].getRollNum() != Dice[scoredSets[5][i]].getRollNum())
+                        allSameAge = false;
+
+                int[] ages = new int[5];
+                for (int i = 0; i < scoredSets[5].Length; i++)
+                    ages[i] = Dice[scoredSets[5][i]].getRollNum();
+
+                var dict = new Dictionary<int, int>();
+                foreach (int d in ages)
+                    if (dict.ContainsKey(d))
+                        dict[d]++;
+                    else
+                        dict.Add(d, 1);
+
+                bool setOfThree = false;
+                foreach (KeyValuePair<int, int> kvp in dict)
+                    if (kvp.Value == 3)
+                        setOfThree = true;
+
+                bool setofFour = false;
+                foreach (KeyValuePair<int, int> kvp in dict)
+                    if (kvp.Value == 4)
+                        setofFour = true;
+
+
+                if (allSameAge)
+                    currentTurnScore += 10000;
+                else if (setofFour)
+                    currentTurnScore += 3050;
+                else if (setOfThree)
+                    currentTurnScore += 850;
+                else
+                    currentTurnScore += 50 * scoredSets[5].Length;
+            }
             else if (scoredSets[5].Length < 3)
                 currentTurnScore += 50 * scoredSets[5].Length;
+            //Scoring the die value 1
             if (scoredSets[1].Length == 3)
-                currentTurnScore += 1000;
+            {
+                bool allSameAge = true;
+                for (int i = 1; i < scoredSets[1].Length; i++)
+                    if (Dice[scoredSets[1][0]].getRollNum() != Dice[scoredSets[1][i]].getRollNum())
+                        allSameAge = false;
+
+                if (allSameAge)
+                    currentTurnScore += 1000;
+                else
+                    currentTurnScore += 100 * scoredSets[1].Length;
+            }
+            else if (scoredSets[1].Length == 4)
+            {
+                bool allSameAge = true;
+                for (int i = 1; i < scoredSets[1].Length; i++)
+                    if (Dice[scoredSets[1][0]].getRollNum() != Dice[scoredSets[1][i]].getRollNum())
+                        allSameAge = false;
+
+                int[] ages = new int[4];
+                for (int i = 0; i < scoredSets[1].Length; i++)
+                    ages[i] = Dice[scoredSets[1][i]].getRollNum();
+
+                var dict = new Dictionary<int, int>();
+                foreach (int d in ages)                
+                    if (dict.ContainsKey(d))
+                        dict[d]++;
+                    else
+                        dict.Add(d, 1);
+
+                bool setOfThree = false;
+                foreach (KeyValuePair<int, int> kvp in dict)
+                    if (kvp.Value == 3)
+                        setOfThree = true;
+
+                if (allSameAge)
+                    currentTurnScore += 3000;
+                else if(setOfThree)
+                    currentTurnScore += 1100;
+                else
+                    currentTurnScore += 100 * scoredSets[1].Length;
+            }
+            else if (scoredSets[1].Length == 5)
+            {
+                bool allSameAge = true;
+                for (int i = 1; i < scoredSets[1].Length; i++)
+                    if (Dice[scoredSets[1][0]].getRollNum() != Dice[scoredSets[1][i]].getRollNum())
+                        allSameAge = false;
+
+                int[] ages = new int[5];
+                for (int i = 0; i < scoredSets[1].Length; i++)
+                    ages[i] = Dice[scoredSets[1][i]].getRollNum();
+
+                var dict = new Dictionary<int, int>();
+                foreach (int d in ages)
+                    if (dict.ContainsKey(d))
+                        dict[d]++;
+                    else
+                        dict.Add(d, 1);
+
+                bool setOfThree = false;
+                foreach (KeyValuePair<int, int> kvp in dict)
+                    if (kvp.Value == 3)
+                        setOfThree = true;
+
+                bool setofFour = false;
+                foreach (KeyValuePair<int, int> kvp in dict)
+                    if (kvp.Value == 4)
+                        setofFour = true;
+
+
+                if (allSameAge)
+                    currentTurnScore += 10000;
+                else if (setofFour)
+                    currentTurnScore += 3100;
+                else if (setOfThree)
+                    currentTurnScore += 1200;
+                else
+                    currentTurnScore += 100 * scoredSets[1].Length;
+            }
             else if (scoredSets[1].Length < 3)
                 currentTurnScore += 100 * scoredSets[1].Length;
         }
