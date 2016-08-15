@@ -54,8 +54,10 @@
             this.dieImageThree = new System.Windows.Forms.Label();
             this.dieImageFour = new System.Windows.Forms.Label();
             this.dieImageFive = new System.Windows.Forms.Label();
+            this.scoreBoardLbl = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -214,6 +216,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.scoreBoardLbl);
             this.groupBox1.Font = new System.Drawing.Font("Comic Sans MS", 10F);
             this.groupBox1.Location = new System.Drawing.Point(20, 290);
             this.groupBox1.Name = "groupBox1";
@@ -231,6 +234,7 @@
             this.endTurnBtn.TabIndex = 12;
             this.endTurnBtn.Text = "End Turn";
             this.endTurnBtn.UseVisualStyleBackColor = true;
+            this.endTurnBtn.Click += new System.EventHandler(this.endTurnBtn_Click);
             // 
             // rollEm
             // 
@@ -280,8 +284,18 @@
             this.dieImageFive.TabIndex = 7;
             this.dieImageFive.Click += new System.EventHandler(this.dieImageFive_Click);
             // 
+            // scoreBoardLbl
+            // 
+            this.scoreBoardLbl.Location = new System.Drawing.Point(10, 30);
+            this.scoreBoardLbl.Multiline = true;
+            this.scoreBoardLbl.Name = "scoreBoardLbl";
+            this.scoreBoardLbl.ReadOnly = true;
+            this.scoreBoardLbl.Size = new System.Drawing.Size(284, 103);
+            this.scoreBoardLbl.TabIndex = 9;
+            // 
             // Form1
             // 
+            this.AcceptButton = this.rollEm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 463);
@@ -303,6 +317,8 @@
             this.menuStrip1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,6 +350,7 @@
         private System.Windows.Forms.Label dieImageThree;
         private System.Windows.Forms.Label dieImageFour;
         private System.Windows.Forms.Label dieImageFive;
+        private System.Windows.Forms.TextBox scoreBoardLbl;
     }
 }
 

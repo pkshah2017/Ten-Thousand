@@ -50,6 +50,12 @@ namespace Ten_Thousand
             curtPlyName.Text = playerInfo[0];
             curtPlyTotScore.Text = playerInfo[1];
             CurtPlyTurnScore.Text = playerInfo[2];
+            Dictionary<string, int> playerScores = game.getScores();
+            string scoreboardText = "";
+            foreach (KeyValuePair<string, int> kvp in playerScores)
+                scoreboardText += kvp.Value + "\t:\t" + kvp.Key + "\r\n";
+            scoreBoardLbl.Text = scoreboardText;
+
         }
 
         private void updateDieImages()
@@ -67,53 +73,50 @@ namespace Ten_Thousand
             game.rollEm();
             updateCurrentPlayerInfo();
             updateDieImages();
+            //rollEm.Enabled = game.getAvaialableMove();
+            rollEm.Enabled = false;
         }
 
         private void dieImageOne_Click(object sender, EventArgs e)
         {
-            if (game != null)
-            {
-                game.dieClick(0);
-                updateDieImages();
-                updateCurrentPlayerInfo();
-            }
+            dieClick(0);
         }
 
         private void dieImageTwo_Click(object sender, EventArgs e)
         {
-            if (game != null)
-            {
-                game.dieClick(1);
-                updateDieImages();
-                updateCurrentPlayerInfo();
-            }
+            dieClick(1);
         }
 
         private void dieImageThree_Click(object sender, EventArgs e)
         {
-            if (game != null)
-            {
-                game.dieClick(2);
-                updateDieImages();
-                updateCurrentPlayerInfo();
-            }
+            dieClick(2);
         }
 
         private void dieImageFour_Click(object sender, EventArgs e)
         {
-            if (game != null)
-            {
-                game.dieClick(3);
-                updateDieImages();
-                updateCurrentPlayerInfo();
-            }
+            dieClick(3);
         }
 
         private void dieImageFive_Click(object sender, EventArgs e)
         {
+            dieClick(4);
+        }
+
+        private void endTurnBtn_Click(object sender, EventArgs e)
+        {
+            game.endTurn();
+            updateCurrentPlayerInfo();
+            updateDieImages();
+            rollEm.Enabled = true;            
+        }
+
+        private void dieClick(int die)
+        {
             if (game != null)
             {
-                game.dieClick(4);
+                bool successful = game.dieClick(die);
+                if (successful)
+                    rollEm.Enabled = true;
                 updateDieImages();
                 updateCurrentPlayerInfo();
             }

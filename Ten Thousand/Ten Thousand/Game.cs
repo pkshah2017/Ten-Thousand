@@ -15,6 +15,7 @@ namespace Ten_Thousand
         private int[][] sets;
         private int currentTurnScore;
         private int rollNum;
+        private bool availableMove;
 
         public Game(string[] names)
         {
@@ -61,6 +62,7 @@ namespace Ten_Thousand
                     Dice[i].ageValue();
             rollNum++;
             checkScorable();
+            checkForAvailableMoves();
         }
 
         /// <summary>
@@ -109,7 +111,8 @@ namespace Ten_Thousand
         /// Toggles the status of die at die Number if it is scorable
         /// </summary>
         /// <param name="dieNumber">The die to toggle (first die is 0)</param>
-        public void dieClick(int dieNumber)
+        ///  <returns>Whether the Die was toggled</returns>
+        public bool dieClick(int dieNumber)
         {
             if (Dice[dieNumber].isScorable())
             {
@@ -122,9 +125,9 @@ namespace Ten_Thousand
                 
             }
             calculateScore();
+            return Dice[dieNumber].isScorable();
         }
-
-        
+                
         /// <summary>
         /// Returns an array of bool, indicating which are rollable
         /// </summary>
@@ -348,6 +351,56 @@ namespace Ten_Thousand
             }
             else if (scoredSets[1].Length < 3)
                 currentTurnScore += 100 * scoredSets[1].Length;
+        }
+
+        public void endTurn()
+        {
+            if (players[currentPlayer].getScore() == 0 && currentTurnScore >= 500)
+                players[currentPlayer].setScore(currentTurnScore);
+            else if (players[currentPlayer].getScore() != 0)
+                players[currentPlayer].addScore(currentTurnScore);
+            currentTurnScore = 0;
+            foreach (Die dice in Dice)
+            {
+                dice.setRollable(true);
+                dice.setScorable(false);
+            }  
+                     
+
+            if (++currentPlayer == players.Length)
+                currentPlayer = 0;           
+        }
+
+        /// <summary>
+        /// Checks if there are any die that are rollable and scorable and updates the avaiable move based on that
+        /// </summary>
+        private void checkForAvailableMoves()
+        {
+            availableMove = false;
+            foreach (Die dice in Dice)            
+                if (dice.isRollable() && dice.isScorable())
+                    availableMove = true;
+        }
+        
+        /// <summary>
+        /// Returns whether there were moves avaiable at the begining of the round.
+        /// </summary>
+        /// <returns>Wherther there were moves available at the begining of the round</returns>
+        public bool getAvaialableMove()
+        {
+            return availableMove;
+        }
+
+        /// <summary>
+        /// Returns a Dictionary with Player Names as Keys and Their Score as the value
+        /// </summary>
+        /// <returns>A dictionary with player names as keys and their scores as the values</returns>
+        public Dictionary<string, int> getScores()
+        {
+            Dictionary<string, int> scores = new Dictionary<string, int>();
+            foreach (Player player in players)            
+                scores.Add(player.getName(), player.getScore());            
+            return scores;
         }
     }
 }
