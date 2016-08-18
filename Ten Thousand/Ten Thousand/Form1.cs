@@ -107,16 +107,16 @@ namespace Ten_Thousand
             game.endTurn();
             updateCurrentPlayerInfo();
             updateDieImages();
-            rollEm.Enabled = true;            
+            rollEm.Enabled = false;  
+                      
         }
 
         private void dieClick(int die)
         {
             if (game != null)
             {
-                bool successful = game.dieClick(die);
-                if (successful)
-                    rollEm.Enabled = true;
+                game.dieClick(die);
+                rollEm.Enabled = game.readyForNextMove();
                 updateDieImages();
                 updateCurrentPlayerInfo();
             }

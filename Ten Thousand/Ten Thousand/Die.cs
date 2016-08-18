@@ -8,11 +8,11 @@ namespace Ten_Thousand
 {
     class Die
     {
-        private int value;
-        private bool rollable; //If it isn't rollable that means it's scored
-        private bool scorable; //If the die can be scored this round
-        private bool newValue; //If the die got the value this round
-        private int rollNum;   //The roll number this die was last set on
+        private int value;      //The current value of the die
+        private bool rollable;  //If it isn't rollable that means it's scored
+        private bool scorable;  //If the die can be scored this round
+        private bool newValue;  //If the die got the value this round
+        private int rollNum;    //The roll number this die was last set on
 
         /// <summary>
         /// Initialize the Die to a value of 0 and a rollable status of true;

@@ -16,6 +16,8 @@ namespace Ten_Thousand
         private int currentTurnScore;
         private int rollNum;
         private bool availableMove;
+        private bool[] scoredAtRoundBegining; //An array containg which dice were scored at the begining of the round
+        private int holdingCurrentTurnScore;
 
         public Game(string[] names)
         {
@@ -26,7 +28,9 @@ namespace Ten_Thousand
             currentPlayer = 0;
             generator = new Random();
             sets = new int[7][];
+            scoredAtRoundBegining = new bool[5];
             rollNum = 0;
+            holdingCurrentTurnScore = 0;
         }
 
         /// <summary>
@@ -52,7 +56,16 @@ namespace Ten_Thousand
         /// </summary>
         public void rollEm()
         {
+            if (checkAllScored())
+            {
+                foreach (Die dice in Dice)
+                {
+                    dice.setRollable(true);
+                }
+            }
             for (int i = 0; i < Dice.Length; i++)
+            {
+                scoredAtRoundBegining[i] = Dice[i].isRollable();
                 if (Dice[i].isRollable())
                 {
                     Dice[i].SetValue(generator.Next(6) + 1);
@@ -60,6 +73,7 @@ namespace Ten_Thousand
                 }
                 else
                     Dice[i].ageValue();
+            }
             rollNum++;
             checkScorable();
             checkForAvailableMoves();
@@ -112,7 +126,7 @@ namespace Ten_Thousand
         /// </summary>
         /// <param name="dieNumber">The die to toggle (first die is 0)</param>
         ///  <returns>Whether the Die was toggled</returns>
-        public bool dieClick(int dieNumber)
+        public void dieClick(int dieNumber)
         {
             if (Dice[dieNumber].isScorable())
             {
@@ -125,7 +139,8 @@ namespace Ten_Thousand
                 
             }
             calculateScore();
-            return Dice[dieNumber].isScorable();
+            Dice[dieNumber].isScorable();
+            checkForAvailableMoves();
         }
                 
         /// <summary>
@@ -162,6 +177,7 @@ namespace Ten_Thousand
         private void calculateScore()
         {
             currentTurnScore = 0;
+            currentTurnScore += holdingCurrentTurnScore;            
             int[][] scoredSets = new int[7][];
             for (int i = 1; i < scoredSets.Length; i++)//One iteration for each possible die value
             {
@@ -368,7 +384,9 @@ namespace Ten_Thousand
                      
 
             if (++currentPlayer == players.Length)
-                currentPlayer = 0;           
+                currentPlayer = 0;
+
+            rollEm();     
         }
 
         /// <summary>
@@ -377,13 +395,13 @@ namespace Ten_Thousand
         private void checkForAvailableMoves()
         {
             availableMove = false;
-            foreach (Die dice in Dice)            
+            foreach (Die dice in Dice)
                 if (dice.isRollable() && dice.isScorable())
                     availableMove = true;
         }
-        
+
         /// <summary>
-        /// Returns whether there were moves avaiable at the begining of the round.
+        /// Returns whether there were moves avaiable.
         /// </summary>
         /// <returns>Wherther there were moves available at the begining of the round</returns>
         public bool getAvaialableMove()
@@ -401,6 +419,51 @@ namespace Ten_Thousand
             foreach (Player player in players)            
                 scores.Add(player.getName(), player.getScore());            
             return scores;
+        }
+
+        public bool readyForNextMove()
+        {
+            if(checkAllScored())
+                return false;
+
+            //Make sure atleast one die is scorable
+            bool oneScored = false;
+            for (int i = 0; i < Dice.Length; i++)
+                if (!Dice[i].isRollable())
+                    oneScored = true;
+            if(!oneScored)
+                return false;
+
+            //Check to see if any of the values have changed
+            bool ready = false;
+            for (int i = 0; i < Dice.Length; i++)
+                if (Dice[i].isRollable() != scoredAtRoundBegining[i])
+                    ready = true;
+            return ready;
+        }
+
+        private void allDieSelected()
+        {
+            holdingCurrentTurnScore += currentTurnScore;
+            foreach (Die dice in Dice)
+            {
+                dice.setRollable(true);
+                dice.setScorable(false);
+            }
+        }
+
+        /// <summary>
+        /// Checks if all dice are scored
+        /// </summary>
+        /// <returns>If all die are scored return true, otherwise returns false</returns>
+        private bool checkAllScored()
+        {
+            bool allScored = true;
+            foreach (Die dice in Dice)            
+                if (dice.isRollable())                
+                    allScored = false;
+              
+            return allScored;
         }
     }
 }
