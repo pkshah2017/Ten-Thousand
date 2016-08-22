@@ -18,6 +18,9 @@ namespace Ten_Thousand
         private bool availableMove;
         private bool[] scoredAtRoundBegining; //An array containg which dice were scored at the begining of the round
         private int holdingCurrentTurnScore;
+        private bool endGameActive;
+        private bool gameActiveState;
+        private const int TEN_THOUSAND = 10000;
 
         public Game(string[] names)
         {
@@ -30,7 +33,10 @@ namespace Ten_Thousand
             sets = new int[7][];
             scoredAtRoundBegining = new bool[5];
             rollNum = 0;
+            currentTurnScore = 0;
             holdingCurrentTurnScore = 0;
+            endGameActive = false;
+            gameActiveState = true;
         }
 
         /// <summary>
@@ -56,12 +62,16 @@ namespace Ten_Thousand
         /// </summary>
         public void rollEm()
         {
+            if (!gameActiveState)
+                return;
             if (checkAllScored())
             {
                 foreach (Die dice in Dice)
                 {
                     dice.setRollable(true);
+                    dice.unlockValue();
                 }
+                holdingCurrentTurnScore = currentTurnScore;
             }
             for (int i = 0; i < Dice.Length; i++)
             {
@@ -72,10 +82,14 @@ namespace Ten_Thousand
                     Dice[i].setRollNum(rollNum);
                 }
                 else
+                {
                     Dice[i].ageValue();
+                    Dice[i].lockValue();
+                }
             }
             rollNum++;
             checkScorable();
+            calculateScore();
             checkForAvailableMoves();
         }
 
@@ -86,7 +100,7 @@ namespace Ten_Thousand
         {
             //If the number is 1 or 5, the number is always scorable
             for (int i = 0; i < Dice.Length; i++)
-                if (Dice[i].GetValue() == 5 || Dice[i].GetValue() == 1)
+                if ((Dice[i].GetValue() == 5 || Dice[i].GetValue() == 1) && !Dice[i].isLocked())
                     Dice[i].setScorable(true);
 
 
@@ -119,7 +133,7 @@ namespace Ten_Thousand
                             if(!Dice[location].isNewValue())//Find the locations where the value isn't new
                                 Dice[location].setScorable(true); //Set that location's scorable status to true
                 }
-        }
+        }   
 
         /// <summary>
         /// Toggles the status of die at die Number if it is scorable
@@ -128,7 +142,7 @@ namespace Ten_Thousand
         ///  <returns>Whether the Die was toggled</returns>
         public void dieClick(int dieNumber)
         {
-            if (Dice[dieNumber].isScorable())
+            if (Dice[dieNumber].isScorable() && !Dice[dieNumber].isLocked())
             {
                 if (Dice[dieNumber].GetValue() == 1 || Dice[dieNumber].GetValue() == 5)
                     Dice[dieNumber].toggleRollable();
@@ -376,15 +390,23 @@ namespace Ten_Thousand
             else if (players[currentPlayer].getScore() != 0)
                 players[currentPlayer].addScore(currentTurnScore);
             currentTurnScore = 0;
+            holdingCurrentTurnScore = 0;
             foreach (Die dice in Dice)
             {
                 dice.setRollable(true);
                 dice.setScorable(false);
-            }  
-                     
+                dice.unlockValue();
+            }
+
+            
+            if (players[currentPlayer].getScore() > TEN_THOUSAND)
+                endGameActive = true;
 
             if (++currentPlayer == players.Length)
                 currentPlayer = 0;
+
+            if (endGameActive && players[currentPlayer].getScore() > TEN_THOUSAND)
+                gameActiveState = false;
 
             rollEm();     
         }
@@ -424,7 +446,7 @@ namespace Ten_Thousand
         public bool readyForNextMove()
         {
             if(checkAllScored())
-                return false;
+                return true;
 
             //Make sure atleast one die is scorable
             bool oneScored = false;
@@ -464,6 +486,17 @@ namespace Ten_Thousand
                     allScored = false;
               
             return allScored;
+        }
+
+        /// <summary>
+        /// Whether the game is active
+        /// </summary>
+        public bool gameActive
+        {
+            get
+            {
+                return gameActiveState;
+            }
         }
     }
 }

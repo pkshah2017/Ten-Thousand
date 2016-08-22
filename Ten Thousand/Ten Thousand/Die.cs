@@ -13,6 +13,7 @@ namespace Ten_Thousand
         private bool scorable;  //If the die can be scored this round
         private bool newValue;  //If the die got the value this round
         private int rollNum;    //The roll number this die was last set on
+        private bool locked;    //If the die value is locked in
 
         /// <summary>
         /// Initialize the Die to a value of 0 and a rollable status of true;
@@ -66,6 +67,22 @@ namespace Ten_Thousand
         public void setRollNum(int roll)
         {
             rollNum = roll;
+        }
+
+        /// <summary>
+        /// Locks the die value
+        /// </summary>
+        public void lockValue()
+        {
+            locked = true;
+        }
+
+        /// <summary>
+        /// Unlocks the die value
+        /// </summary>
+        public void unlockValue()
+        {
+            locked = false;
         }
         
         /// <summary>
@@ -127,6 +144,15 @@ namespace Ten_Thousand
         public int getRollNum()
         {
             return rollNum;
+        }
+
+        /// <summary>
+        /// The locked status of the die
+        /// </summary>
+        /// <returns>Whether the die is locked</returns>
+        public bool isLocked()
+        {
+            return locked;
         }
     }
 }

@@ -48,13 +48,13 @@
             this.curtPlyName = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.scoreBoardLbl = new System.Windows.Forms.TextBox();
             this.endTurnBtn = new System.Windows.Forms.Button();
             this.rollEm = new System.Windows.Forms.Button();
             this.dieImageTwo = new System.Windows.Forms.Label();
             this.dieImageThree = new System.Windows.Forms.Label();
             this.dieImageFour = new System.Windows.Forms.Label();
             this.dieImageFive = new System.Windows.Forms.Label();
-            this.scoreBoardLbl = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -119,6 +119,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -132,13 +133,13 @@
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(125, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
             this.helpToolStripMenuItem1.Text = "Help";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "About";
             // 
             // CurtPlyTurnScore
@@ -225,6 +226,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Scoreboard";
             // 
+            // scoreBoardLbl
+            // 
+            this.scoreBoardLbl.Location = new System.Drawing.Point(10, 30);
+            this.scoreBoardLbl.Multiline = true;
+            this.scoreBoardLbl.Name = "scoreBoardLbl";
+            this.scoreBoardLbl.ReadOnly = true;
+            this.scoreBoardLbl.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.scoreBoardLbl.Size = new System.Drawing.Size(284, 103);
+            this.scoreBoardLbl.TabIndex = 9;
+            // 
             // endTurnBtn
             // 
             this.endTurnBtn.Font = new System.Drawing.Font("Comic Sans MS", 10F);
@@ -283,15 +294,6 @@
             this.dieImageFive.Size = new System.Drawing.Size(80, 80);
             this.dieImageFive.TabIndex = 7;
             this.dieImageFive.Click += new System.EventHandler(this.dieImageFive_Click);
-            // 
-            // scoreBoardLbl
-            // 
-            this.scoreBoardLbl.Location = new System.Drawing.Point(10, 30);
-            this.scoreBoardLbl.Multiline = true;
-            this.scoreBoardLbl.Name = "scoreBoardLbl";
-            this.scoreBoardLbl.ReadOnly = true;
-            this.scoreBoardLbl.Size = new System.Drawing.Size(284, 103);
-            this.scoreBoardLbl.TabIndex = 9;
             // 
             // Form1
             // 

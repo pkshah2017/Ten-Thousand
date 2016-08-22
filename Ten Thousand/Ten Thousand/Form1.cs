@@ -74,7 +74,7 @@ namespace Ten_Thousand
             updateCurrentPlayerInfo();
             updateDieImages();
             //rollEm.Enabled = game.getAvaialableMove();
-            rollEm.Enabled = false;
+            updateButtons();
         }
 
         private void dieImageOne_Click(object sender, EventArgs e)
@@ -107,8 +107,13 @@ namespace Ten_Thousand
             game.endTurn();
             updateCurrentPlayerInfo();
             updateDieImages();
-            rollEm.Enabled = false;  
-                      
+            updateButtons();
+        }
+
+        private void updateButtons()
+        {
+            endTurnBtn.Enabled = game.gameActive;
+            rollEm.Enabled = false;
         }
 
         private void dieClick(int die)
@@ -120,6 +125,11 @@ namespace Ten_Thousand
                 updateDieImages();
                 updateCurrentPlayerInfo();
             }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -53,7 +53,7 @@
             this.addBtn.Location = new System.Drawing.Point(140, 301);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(77, 36);
-            this.addBtn.TabIndex = 10;
+            this.addBtn.TabIndex = 1;
             this.addBtn.Text = "Add";
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
@@ -64,7 +64,7 @@
             this.clearBtn.Location = new System.Drawing.Point(24, 301);
             this.clearBtn.Name = "clearBtn";
             this.clearBtn.Size = new System.Drawing.Size(74, 36);
-            this.clearBtn.TabIndex = 9;
+            this.clearBtn.TabIndex = 3;
             this.clearBtn.Text = "Clear Names";
             this.clearBtn.UseVisualStyleBackColor = true;
             this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
@@ -94,7 +94,7 @@
             this.nameTxt.Location = new System.Drawing.Point(81, 52);
             this.nameTxt.Name = "nameTxt";
             this.nameTxt.Size = new System.Drawing.Size(202, 42);
-            this.nameTxt.TabIndex = 6;
+            this.nameTxt.TabIndex = 0;
             // 
             // NewGame
             // 
